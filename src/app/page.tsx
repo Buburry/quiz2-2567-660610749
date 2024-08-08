@@ -1,7 +1,58 @@
+"use client"
+
 import Image from "next/image";
 import styles from "./page.module.css";
-
+import PostOwnner from "@/components/PostOwnner";
+import Comment from "@/components/Comment";
+import { useEffect, useState } from "react";
+import { commentprops } from "@/libs/types";
+import { comments } from "@/libs/comments";
 export default function Home() {
+  const [users, setUsers] = useState<commentprops[]>([]);
+  
+//  const Commentuser = () => {
+//     // const newComment: commentprops = {
+//     //   ImagePath: "path_to_image",
+//     //   username: "user_name",
+//     //   commentTitle: "comment_title",
+//     //   likes: 0,
+//     //   replies: [],
+//     // };
+//    // setUsers((prevUsers) => [...prevUsers, newComment]);
+//     const commentuser = users.map((user) => {
+//       // Perform any necessary cleaning or validation on user data
+//       return {
+//         username: comments[0].username,
+//         ImagePath: comments[0].userImagePath,
+//         commentTitle: comments[0].commentText,
+//         likes: comments[0].likeNum,
+//         replies: comments[0].replies,
+//       };
+//     //})
+//     setuesrs(commentuser)
+//     // setUsers(() => [
+//     //   {
+//     //     username: comments[0].username,
+//     //     ImagePath: comments[0].userImagePath,
+//     //     commentTitle: comments[0].commentText,
+//     //     likes: comments[0].likeNum,
+//     //     replies: comments[0].replies,
+//     //   },
+//     // ]);
+//   })}
+  const impoertcomment = () => {
+    const commentuser = users.map((user) => {
+      // Perform any necessary cleaning or validation on user data
+      return {
+        username: comments[0].username,
+        ImagePath: comments[0].userImagePath,
+        commentTitle: comments[0].commentText,
+        likes: comments[0].likeNum,
+        replies: comments[0].replies,
+      };
+    });
+    setUsers(commentuser);
+  }
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "ghostwhite" }}
@@ -13,72 +64,24 @@ export default function Home() {
         className="mx-auto p-3 rounded rounded-3 shadow-sm bg-white"
       >
         {/* Post Owner Example*/}
-        <div className="vstack gap-3">
-          <div className="d-flex align-items-center gap-3">
-            <img
-              src="/profileImages/handsome.jpg"
-              width="48"
-              height="48"
-              className="rounded-circle"
-              style={{ objectFit: "cover" }}
-            />
-            <span className="fw-semibold fs-5">Chayanin Suatap 650610560</span>
-          </div>
-
-          <span>Quiz ง่ายจังเลยครับ ขอยาก ๆ กว่านี้ได้ไหม #261207</span>
-
-          <div className="d-flex align-items-center gap-1">
-            <img src="/like.svg" width={20}></img>
-            <span className="text-muted">100 คน</span>
-          </div>
-          <hr className="m-0 border" />
-        </div>
+        <PostOwnner />
 
         {/* Comment Example */}
-        <div className="d-flex gap-2 my-2">
-          <img
-            src="/profileImages/lisa.jpg"
-            width="48"
-            height="48"
-            className="rounded-circle"
-            style={{ objectFit: "cover" }}
-          />
-          <div
-            className="rounded rounded-3 p-2"
-            style={{ backgroundColor: "#E5E7EB" }}
-          >
-            <span className="fw-semibold">Lisa</span>
-            <br />
-            <span>จริงค่า</span>
-            <div className="d-flex align-items-center gap-1">
-              <img src="/like.svg" width={20}></img>
-              <span className="text-muted">999 คน</span>
-            </div>
-          </div>
-        </div>
+        {users.map((user) => {
+          return (
+            <Comment
+              key={user.username}
+              ImagePath={user.ImagePath}
+              username={user.username}
+              commentTitle={user.commentTitle}
+              likes={user.likes}
+              replies={user.replies}
+            />
+          );
+        })};
 
         {/* Reply Example */}
-        <div className="d-flex gap-2 my-2 ps-5">
-          <img
-            src="/profileImages/puppy.jpg"
-            width="48"
-            height="48"
-            className="rounded-circle"
-            style={{ objectFit: "cover" }}
-          />
-          <div
-            className="rounded rounded-3 p-2"
-            style={{ backgroundColor: "#E5E7EB" }}
-          >
-            <span className="fw-semibold">หมาน้อย</span>
-            <br />
-            <span>จริงค้าบบบบบบบบ</span>
-            <div className="d-flex align-items-center gap-1">
-              <img src="/like.svg" width={20}></img>
-              <span className="text-muted">2 คน</span>
-            </div>
-          </div>
-        </div>
+        
 
         {/* map-loop render Comment component here */}
       </div>
