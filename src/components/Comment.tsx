@@ -2,7 +2,7 @@
 
 import { commentprops } from "@/libs/types";
 import Reply from "@/components/Reply";
-import { useState } from "react";
+import { useEffect, useState } from "react";
   
 export default function Comment({ 
     ImagePath,
@@ -12,7 +12,12 @@ export default function Comment({
     replies, 
 }:commentprops) {
   const [showReplies, setShowReplies] = useState<any>();
-  
+  const Replyuser = (() => {
+    return setShowReplies(replies)
+  })
+  useEffect(() => {
+    return setShowReplies(replies)
+  },[])
   return (
     <div>
       <div className="d-flex gap-2 my-2">
@@ -37,7 +42,8 @@ export default function Comment({
           </div>
         </div>
       {/* You can use map-loop to render Reply component here */}
-      {replies.map(() => {<Reply
+      {replies.map(() => {
+      <Reply
               key={username}
               ImagePath={ImagePath}
               username={username}

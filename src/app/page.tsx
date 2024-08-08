@@ -10,49 +10,17 @@ import { comments } from "@/libs/comments";
 export default function Home() {
   const [users, setUsers] = useState<commentprops[]>([]);
   
-//  const Commentuser = () => {
-//     // const newComment: commentprops = {
-//     //   ImagePath: "path_to_image",
-//     //   username: "user_name",
-//     //   commentTitle: "comment_title",
-//     //   likes: 0,
-//     //   replies: [],
-//     // };
-//    // setUsers((prevUsers) => [...prevUsers, newComment]);
-//     const commentuser = users.map((user) => {
-//       // Perform any necessary cleaning or validation on user data
-//       return {
-//         username: comments[0].username,
-//         ImagePath: comments[0].userImagePath,
-//         commentTitle: comments[0].commentText,
-//         likes: comments[0].likeNum,
-//         replies: comments[0].replies,
-//       };
-//     //})
-//     setuesrs(commentuser)
-//     // setUsers(() => [
-//     //   {
-//     //     username: comments[0].username,
-//     //     ImagePath: comments[0].userImagePath,
-//     //     commentTitle: comments[0].commentText,
-//     //     likes: comments[0].likeNum,
-//     //     replies: comments[0].replies,
-//     //   },
-//     // ]);
-//   })}
-  const impoertcomment = () => {
-    const commentuser = users.map((user) => {
-      // Perform any necessary cleaning or validation on user data
-      return {
-        username: comments[0].username,
-        ImagePath: comments[0].userImagePath,
-        commentTitle: comments[0].commentText,
-        likes: comments[0].likeNum,
-        replies: comments[0].replies,
-      };
-    });
-    setUsers(commentuser);
-  }
+          useEffect(() => {
+            const newComment: commentprops = {
+              username: comments[0].username,
+              ImagePath: comments[0].userImagePath,
+              commentTitle: comments[0].commentText,
+              likes: comments[0].likeNum,
+              replies: comments[0].replies,
+            };
+            setUsers((prevUsers) => [...prevUsers, newComment]);
+          }, []);
+  
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "ghostwhite" }}
