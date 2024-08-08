@@ -20,7 +20,17 @@ export default function Home() {
             };
             setUsers((prevUsers) => [...prevUsers, newComment]);
           }, []);
-  
+          
+  const commentuser = (() => {
+    const newComment: commentprops = {
+      username: comments[0].username,
+      ImagePath: comments[0].userImagePath,
+      commentTitle: comments[0].commentText,
+      likes: comments[0].likeNum,
+      replies: comments[0].ReplyProps,
+    };
+    setUsers((prevUsers) => [...prevUsers, newComment]);
+  })
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "ghostwhite" }}
