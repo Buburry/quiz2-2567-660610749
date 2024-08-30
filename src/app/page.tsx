@@ -10,27 +10,28 @@ import { comments } from "@/libs/comments";
 export default function Home() {
   const [users, setUsers] = useState<commentprops[]>([]);
   
-          useEffect(() => {
-            const newComment: commentprops = {
-              username: comments[0].username,
-              ImagePath: comments[0].userImagePath,
-              commentTitle: comments[0].commentText,
-              likes: comments[0].likeNum,
-              replies: comments[0].replies,
-            };
-            setUsers((prevUsers) => [...prevUsers, newComment]);
-          }, []);
-          
-  const commentuser = (() => {
-    const newComment: commentprops = {
-      username: comments[0].username,
-      ImagePath: comments[0].userImagePath,
-      commentTitle: comments[0].commentText,
-      likes: comments[0].likeNum,
-      replies: comments[0].ReplyProps,
-    };
-    setUsers((prevUsers) => [...prevUsers, newComment]);
-  })
+  
+
+  // useEffect(() => {
+  //     return setUsers(comments);
+  useEffect(() => {
+     setUsers(comments.map((comment) => ({
+      ImagePath: comment.userImagePath,
+      username: comment.username,
+      commentTitle: comment.commentText,
+      likes: comment.likeNum,
+      replies: comment.replies?.map((reply:any) => ({
+
+        ImagePath: reply.userImagePath,
+        username: reply.username,
+        replyTitle: reply.replyText,
+        likeNum: reply.likeNum,
+      })) || [],
+    })));
+  }, []);
+  
+ // }, []);
+
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "ghostwhite" }}
